@@ -1,0 +1,21 @@
+public:
+    int dp[10001];
+    int helper(int arr[], int ind)
+    {
+        if(ind==0) return arr[0];
+        if(ind<0) return 0;
+        
+        if(dp[ind]!=-1) return dp[ind];
+        int pick=arr[ind]+helper(arr, ind-2);
+        int nonPick=helper(arr,ind-1);
+        
+        return dp[ind]=max(pick,nonPick);
+        
+    }
+    //Function to find the maximum money the thief can get.
+    int FindMaxSum(int arr[], int n)
+    {
+        memset(dp,-1,sizeof(dp));
+        return helper(arr,n-1);
+        // Your code here
+    }
