@@ -1,0 +1,22 @@
+int dp[1000001];
+  
+    int helper(int n, vector<int>& height, int k){
+        if(n == 0) return 0;
+        
+        if(dp[n] != -1) return dp[n];
+        
+        int miniStep = INT_MAX;
+        
+        for(int i=1;i<=k;i++){
+            if(n - i >= 0){
+                int jump = helper(n-i, height, k) + abs(height[n] - height[n-i]);
+                miniStep = min(miniStep, jump);
+            }
+        }
+        return dp[n] = miniStep;
+    }
+  
+    int minimizeCost(vector<int>& height, int n, int k) {
+        memset(dp, -1, sizeof(dp));
+        return helper(n-1, height, k);
+    }
