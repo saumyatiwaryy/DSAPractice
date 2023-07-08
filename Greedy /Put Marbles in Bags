@@ -1,0 +1,31 @@
+Algorithm:
+Collect the value of every pair from weights in the array pairWeights.
+
+Sort pairWeights.
+
+Get the sum of the k - 1 largest pairs, and the sum of the k - 1 smallest pairs.
+
+Return answer as the difference of the two sums in step 3.
+
+Implementation:
+class Solution {
+public:
+    long long putMarbles(vector<int>& weights, int k) {
+      int n=weights.size();
+        //initialize pw vector
+        vector <int> pw(n-1,0);
+        //storing sum of splitted points in pw vector 
+        for(int i=0;i<n-1;++i)
+        {
+            pw[i]=weights[i]+weights[i+1];
+        }
+        //sorting
+        sort(pw.begin(),pw.end());
+        long long ans =0;
+        for(int i=0;i<k-1;i++)
+        {
+          ans+=pw[n-2-i]-pw[i];  
+        }
+        return ans;
+    }
+};
